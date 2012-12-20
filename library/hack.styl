@@ -1,0 +1,14 @@
+/******************************************************************************
+
+    HACKS
+
+    Unfortunate reality of web development is the reliance on certain hacks.
+    Use these at your own risk. They might have side effects.
+
+******************************************************************************/
+
+// Apply one property to all browsers, and another to IE < 7
+// IE6 ignores !important if another value is given for the same property
+ie-6-property-hack(name, normalValue, ieValue)
+    {name} normalValue !important
+    {name} ieValue

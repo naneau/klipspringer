@@ -1,0 +1,68 @@
+/******************************************************************************
+
+     GRID LAYOUTS
+
+     Functions that allow for the creation of a flexible grid system.
+
+******************************************************************************/
+
+@import "distances"
+@import "float"
+
+// Number of columns in the grid
+// Best generic results if divisible by both 2 and 3
+grid-default-column-count     ?= 12
+
+// Default padding distance between grid columns
+grid-default-padding-distance ?= padding-distance
+
+// "Row" container for a grid layout
+grid-row()
+    float-clear-container()
+
+// Width of a single column in a grid layout
+grid-column-width(
+        grid-width,
+        column-span             = 1,
+        column-padding-distance = grid-default-padding-distance,
+        total-column-count      = grid-default-column-count
+    )
+
+    // Available width for *all* columns
+    availableWidth = grid-width - (column-padding-distance * (total-column-count - 1))
+
+    // Width of a single column
+    singleWidth = (availableWidth / total-column-count)
+
+    // Width of the column (includes padding that would otherwise be shown)
+    (singleWidth * column-span) + (column-padding-distance * (column-span - 1))
+
+// Single column in a grid
+grid-column(
+        grid-width,
+        column-span             = 1,
+        column-padding-distance = grid-default-padding-distance,
+        total-column-count      = 12
+    )
+
+    // Width
+    width grid-column-width(
+        grid-width,
+        column-span,
+        column-padding-distance,
+        total-column-count
+    )
+
+    float left
+
+    // Margin on the left for all but the first column
+    margin-left padding-distance
+    &:first-child
+        margin-left 0
+
+// Full column, spanning the entire width of the grid
+// Useful for switching layouts using @media queries
+grid-column-full()
+    width auto
+    float none
+    clear both

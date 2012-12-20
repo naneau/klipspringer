@@ -1,0 +1,81 @@
+/******************************************************************************
+
+    BORDER STYLES
+
+******************************************************************************/
+
+// Default border size
+border-default-size             ?= 1px
+
+// Default shading difference for border up/down/inset
+border-default-shade-difference ?= 10%
+
+// Block with an even border
+border(
+        color,
+        border-size = border-default-size
+    )
+
+    border border-size solid color
+
+// Block with an upwards border
+border-up(
+        color,
+        border-size      = border-default-size,
+        shade-difference = border-default-shade-difference
+    )
+
+    border(color, border-size)
+    border-top border-size solid lighten(color, shade-difference)
+    border-left border-size solid lighten(color, shade-difference)
+
+// Block with a downwards border
+border-down(
+        color,
+        border-size      = border-default-size,
+        shade-difference = border-default-shade-difference
+    )
+
+    border(color, border-size)
+    border-right border-size solid darken(color, shade-difference)
+    border-bottom border-size solid darken(color, shade-difference)
+
+// Create an inset border on the right of an element
+border-inset-top(
+        color,
+        border-size      = border-default-size,
+        shade-difference = border-default-shade-difference
+    )
+
+    box-shadow 0 (- border-size) 0 darken(color, shade-difference)
+    border-top border-size solid lighten(color, shade-difference)
+
+// Create an inset border on the right of an element
+border-inset-right(
+        color,
+        border-size      = border-default-size,
+        shade-difference = border-default-shade-difference
+    )
+
+    box-shadow border-size 0 0 lighten(color, shade-difference)
+    border-right border-size solid darken(color, shade-difference)
+
+// Create an inset border on the right of an element
+border-inset-bottom(
+        color,
+        border-size      = border-default-size,
+        shade-difference = border-default-shade-difference
+    )
+
+    box-shadow 0 border-size 0 lighten(color, shade-difference)
+    border-bottom border-size solid darken(color, shade-difference)
+
+// Create an inset border on the left of an element
+border-inset-left(
+        color,
+        border-size      = border-default-size,
+        shade-difference = border-default-shade-difference
+    )
+
+    box-shadow (- border-size) 0 0 darken(color, shade-difference)
+    border-left border-size solid lighten(color, shade-difference)

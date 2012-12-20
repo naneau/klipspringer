@@ -1,0 +1,121 @@
+/******************************************************************************
+
+    TABLES
+
+******************************************************************************/
+
+@import "color"
+
+table-default-shade-one    ?= color-background
+table-default-shade-two    ?= color-light-background
+table-default-border-size  ?= 1px
+table-default-border-color ?= color-border
+
+// "Default" table
+table-default()
+
+    table-full()
+    table-border-collapse()
+    table-text-align()
+
+// Full width table
+table-full()
+    width 100%
+
+// Collapse borders
+table-border-collapse()
+    border-collapse collapse
+
+// align text to direction
+table-text-align(direction = left)
+    text-align direction
+
+// Zebra striped table
+table-row-stripe(
+        shade-one    = table-default-shade-one,
+        shade-two    = table-default-shade-two,
+        border-color = table-default-border-color,
+        border-size  = table-default-border-size
+    )
+
+    // Even
+    tr:nth-child(2n+0) td
+        background-color shade-one
+        border-bottom none
+        border-top none
+
+    // Odd
+    tr:nth-child(2n+1) td
+        background-color shade-two
+
+        if border-size > 0
+            border-bottom border-size solid border-color
+            border-top border-size solid border-color
+
+// Zebra striped columns
+table-column-stripe(
+        shade-one    = table-default-shade-one,
+        shade-two    = table-default-shade-two,
+        border-color = table-default-border-color,
+        border-size  = table-default-border-size
+    )
+
+    tr td
+        if border-size > 0
+            border-right border-size solid border-color
+            border-left border-size solid border-color
+
+        // Even columns
+        &:nth-child(2n+0)
+            background-color shade-one
+
+        // Odd columns
+        &:nth-child(2n+1)
+            background-color shade-two
+
+// Zebra striped table in both horizontal and vertical direction
+// Uses shade-one and shade-two for the horizontal zebra and shades them by
+// column-shade in the vertical rows
+table-row-stripe-and-column-stripe(
+        shade-one    = table-default-shade-one,
+        shade-two    = table-default-shade-two,
+        column-shade = 10%,
+        border-color = table-default-border-color,
+        border-size  = table-default-border-size
+    )
+
+    // Even columns
+    tr:nth-child(2n+0) td,
+    tr:nth-child(2n+0) th
+        background-color shade-one
+        border-bottom none
+        border-top none
+
+        &:nth-child(2n+0)
+            background-color shade-one
+
+        &:nth-child(2n+1)
+            background-color darken(shade-one, column-shade)
+
+    // Odd columns
+    tr:nth-child(2n+1) td,
+    tr:nth-child(2n+1) th
+        background-color shade-two
+
+        &:nth-child(2n+0)
+            background-color shade-two
+
+        &:nth-child(2n+1)
+            background-color darken(shade-two, column-shade)
+
+        if border-size > 0
+            border-bottom border-size solid border-color
+            border-top border-size solid border-color
+
+    // Vertical borders
+    tr td,
+    tr th
+        if border-size > 0
+            border-right border-size solid border-color
+            border-left border-size solid border-color
+

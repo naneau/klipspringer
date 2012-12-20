@@ -1,0 +1,57 @@
+/******************************************************************************
+
+    SHADOWS
+
+    CSS3 box shadow effects
+
+******************************************************************************/
+
+box-shadow-default-color             ?= #555
+box-shadow-default-vertical-offset   ?= 1px
+box-shadow-default-horizontal-offset ?= 1px
+box-shadow-default-blur              ?= 1px
+box-shadow-default-spread            ?= 0
+
+// Box shadow
+box-shadow()
+    vendor('box-shadow', arguments)
+
+// Box shadow definition
+// Creates a string box shadow definition
+box-shadow-def(
+        color      = box-shadow-default-color,
+        horizontal = box-shadow-default-horizontal-offset,
+        vertical   = box-shadow-default-vertical-offset,
+        blur       = box-shadow-default-blur,
+        spread     = box-shadow-default-spread,
+        inset      = false
+    )
+
+    insetWord = (inset) ? 'inset' : ''
+
+    join ' ', insetWord, horizontal, vertical, blur, spread, color
+
+// Apply multiple box shadow definitions
+box-shadows()
+    border: 1px solid red
+    box-shadow join(', ', arguments)
+
+// "Well" effect shadow
+box-shadow-inset-well(
+        color = box-shadow-default-color,
+        blur  = padding-distance-tiny,
+    )
+
+    box-shadow inset 0 0 blur 0 color
+
+// Create a well effect for a box using the background color as a base
+box-shadow-inset-well-from-background(
+        bg-color,
+        blur  = padding-distance-tiny,
+        shade = 10%
+    )
+
+    box-shadow-inset-well(
+        darken(bg-color, shade),
+        blur
+    )

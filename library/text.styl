@@ -1,0 +1,110 @@
+/******************************************************************************
+
+    TEXT STYLES
+
+    Defines a set of classes for certain types of text such as headers and
+    paragraphs
+
+******************************************************************************/
+
+// Font family for default text
+text-font-family        ?= Helvetica Neue, Helvetica, Arial, Sans Serif
+
+// Font family for header text
+text-font-family-header ?= Helvetica Neue, Helvetica, Arial, Sans Serif
+
+// Font family for action texts
+text-font-family-action ?= Helvetica Neue, Helvetica, Arial, Sans Serif
+
+// Bolden headers?
+text-bolden-headers     ?= true
+
+// Weight for lead font
+text-lead-font-weight   ?= 200
+
+// Default font size
+text-default-size       ?= 14px
+
+// Default font colors
+text-color              ?= #353434
+text-color-dark         ?= darken(text-color, 60%)
+text-color-light        ?= lighten(text-color, 60%)
+
+// Ratio for the line-height multiplication
+text-line-height-ratio  ?= 1.9
+
+// Apply default text styles
+text(
+        size-ratio        = 1,
+        size-default      = text-default-size,
+        line-height-ratio = text-line-height-ratio,
+        inherit-color     = true
+    )
+
+    font-family text-font-family
+
+    if inherit-color
+        color inherit
+
+    // Actual font size is a default size times a ratio
+    font-size (size-default * size-ratio)
+
+    // Lineheight is expressed as a derivative of the font size
+    line-height (size-default * size-ratio) * line-height-ratio
+
+// Base class for text of a header
+text-header(
+        size   = 1,
+        bolden = text-bolden-headers
+    )
+
+    text(size)
+
+    line-height text-size * size
+    font-family text-font-family-header
+
+    if bolden
+        font-weight bold
+
+    -webkit-font-smoothing antialiased;
+
+// Lead text
+text-lead(
+        size = 1,
+        weight = text-lead-font-weight
+    )
+
+    text(size)
+    font-weight weight
+
+// "Action" text, for UI elements
+text-action(
+        size = 1
+    )
+    text(size)
+
+    line-height text-size * size
+    -webkit-font-smoothing antialiased;
+
+    font-family: text-font-family-action
+
+// Force line-wrapping
+// see http://perishablepress.com/wrapping-content/
+text-force-line-wrap()
+    // CSS 2.0
+    white-space pre
+    // CSS 2.1
+    white-space pre-wrap
+    // CSS 3.0
+    white-space pre-line
+    // Opera 4-6
+    white-space -pre-wrap
+    // Opera 7
+    white-space -o-pre-wrap
+    // Mozilla
+    white-space -moz-pre-wrap
+    // HP Printers
+    white-space -hp-pre-wrap
+    // IE 5+
+    word-wrap break-word
+

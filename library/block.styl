@@ -1,0 +1,53 @@
+/******************************************************************************
+
+    BLOCK LEVEL STYLING
+
+******************************************************************************/
+
+@import "box-shadow"
+@import "border"
+@import "distances"
+
+// Block level element
+block(margin = padding-distance)
+    margin-bottom margin
+
+// Block with a background color
+block-background(
+        bg-color,
+        padding = padding-distance
+    )
+    background-color bg-color
+    padding padding
+
+// Block with a background and an even border based on the bg-color
+block-background-border(
+        bg-color,
+        padding = padding-distance,
+        border-shade = 10%
+    )
+
+    block-background(bg-color, padding)
+    border(bg-color, darken(bg-color, border-shade))
+
+// Rounded block with a background
+block-background-rounded(
+        bg-color,
+        padding = padding-distance,
+        border-radius = border-radius-small
+    )
+
+    block-background(bg-color, padding)
+    vendor('border-radius', border-radius)
+
+// Welled block, given an inside welled shadow
+// see box-shadow.styl
+block-welled(
+        bg-color,
+        shade = 10%,
+        shadow-size = padding-distance-small
+    )
+
+    block-background(bg-color)
+    border-down(darken(bg-color, shade), shade)
+    shadow-inset-well(bg-color, shade, shadow-size)

@@ -1,0 +1,42 @@
+/******************************************************************************
+
+    COLOR FUNCTIONS
+
+******************************************************************************/
+
+// Set of color defaults
+color-background       ?= #fff
+color-text             ?= #333
+color-light-background ?= #f3f3f3
+color-light-border     ?= darken(color-light-background, 6%)
+color-dark-border      ?= color-text
+
+// YIQ value of a color
+// See http://en.wikipedia.org/wiki/YIQ
+color-yiq(bg-color)
+    (299 * red(bg-color) + 587 * green(bg-color) + 114 * blue(bg-color)) / 1000
+
+// Create an inset font effect for a background color
+// FIXME this can probably use more math and less else-if
+color-inset-font(bg-color, font-color = darken(bg-color, 70%))
+
+    // Get the YIQ
+    yiqValue = color-yiq(bg-color)
+
+    text-shadow: none
+    if yiqValue < 32
+        color: lighten(font-color, 75%)
+    else if yiqValue < 64
+        color: lighten(font-color, 85%)
+    else if yiqValue < 96
+        color: lighten(font-color, 90%)
+    else if yiqValue < 128
+        color: lighten(font-color, 100%)
+    else if yiqValue < 160
+        color: darken(font-color, 100%)
+    else if yiqValue < 192
+        color: darken(font-color, 90%)
+    else if yiqValue < 224
+        color: darken(font-color, 85%)
+    else
+        color: darken(font-color, 75%)

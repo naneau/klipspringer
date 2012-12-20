@@ -1,0 +1,26 @@
+{
+  "name": "klipspringer",
+  "version": "0.0.1",
+  "description": "Klipspringer - Stylus framework",
+  "main": "index.js",
+  "dependencies": {
+    "stylus": "~0.31.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/naneau/klipspringer.git"
+  },
+  "keywords": [
+    "stylus",
+    "framework",
+    "css",
+    "css3",
+    "html5"
+  ],
+  "author": "Maurice Fonk",
+  "license": "BSD"
+}

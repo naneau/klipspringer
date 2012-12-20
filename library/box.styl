@@ -1,0 +1,79 @@
+/******************************************************************************
+
+    BOX MODEL
+
+******************************************************************************/
+
+// Use hack to have IE < 7 support min/max - height/width
+box-use-ie-min-max-hack ?= true
+
+// Hide all text of a box, showing the background
+// See http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/
+box-hide-text()
+    text-indent 110%
+    white-space nowrap
+    overflow hidden
+
+// Alternate method for hiding the text of a block
+// Shifts text to the left, but will draw a box, noticeably slower especially on mobile
+// Should have slightly better support though
+box-hide-text-alternate()
+    // Hides on most screens
+    text-indent -99999em
+    overflow hidden
+    text-align left
+
+// Replace text with an image
+box-replace-text-image(
+        url,
+        x = 50%,
+        y = 50%
+    )
+
+    box-hide-text()
+
+    background-image url(url)
+    background-position x y
+
+// Replace a box' text with an image
+// Resizes the box to match the dimensions of the image
+box-replace-text-image-size(
+        url,
+        x = 50%,
+        y = 50%
+    )
+
+    box-replace-text-image(url, x, y)
+
+    size = image-size(url)
+
+    width size[0]
+    height size[1]
+
+// Minimum height
+min-height(height)
+    min-height height
+
+    if box-use-ie-min-max-hack
+        height unquote("expression(this.scrollHeight > " + height + " ? " + height + " : 'auto')")
+
+// Maximum height
+max-height(height)
+    max-height height
+
+    if box-use-ie-min-max-hack
+        height unquote("expression(this.scrollHeight < " + height + " ? " + height + " : 'auto')")
+
+// Minimum width
+min-width(width)
+    max-height width
+
+    if box-use-ie-min-max-hack
+        width unquote("expression(this.scrollWidth < " + width + " ? " + width + " : 'auto')")
+
+// Maximum width
+max-width(width)
+    max-height width
+
+    if box-use-ie-min-max-hack
+        width unquote("expression(this.scrollWidth < " + width + " ? " + width + " : 'auto')")

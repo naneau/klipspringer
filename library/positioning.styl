@@ -1,0 +1,89 @@
+/******************************************************************************
+    POSITIONING
+
+    Absolutely positioning elements in a relative container
+
+******************************************************************************/
+
+// Fixed at the top of the page
+position-fixed-top()
+    position fixed
+    top 0
+
+// Fixed at the bottom of the page
+position-fixed-bottom()
+    position fixed
+    bottom 0
+
+// Fixed at the bottom and left of the page
+position-fixed-top-left()
+    position fixed
+    top 0
+    left 0
+
+// Fixed at the top and right of the page
+position-fixed-top-right()
+    position fixed
+    top 0
+    right 0
+
+// Fixed at the top and left of the page
+position-fixed-bottom-left()
+    position fixed
+    bottom 0
+    left 0
+
+// Fixed at the bottom and right of the page
+position-fixed-bottom-right()
+    position fixed
+    bottom 0
+    right 0
+
+// Fixed at the bottom of the page with a width of 100%
+position-fixed-full-bottom()
+    position-fixed-bottom-left()
+    width 100%
+
+// Fixed at the top of the page with a width of 100%
+position-fixed-full-top()
+    position-fixed-top-left()
+    width 100%
+
+// Stretch a child element into a container
+// Parent container needs to be relatively or absolutely positioned for this to work
+stretch(
+        offset-top    = 0,
+        offset-right  = 0,
+        offset-bottom = 0,
+        offset-left   = 0
+    )
+
+    position absolute
+
+    if offset-top > 0
+        top offset-top
+
+    if offset-right > 0
+        right offset-right
+
+    if offset-bottom > 0
+        bottom offset-bottom
+
+    if offset-left > 0
+        left offset-left
+
+// Stretch y component
+stretch-y(
+        offset-top    = 0,
+        offset-bottom = 0
+    )
+
+    stretch(offset-top, 0, offset-bottom, 0)
+
+// Stretch x component
+stretch-x(
+        offset-left  = 0,
+        offset-right = 0
+    )
+
+    stretch(0, offset-right, 0, offset-left)

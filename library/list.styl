@@ -1,0 +1,54 @@
+/******************************************************************************
+
+    ORDERED AND UNORDERED LISTS
+
+******************************************************************************/
+
+@import "distances"
+
+// No bullet for a list item
+list-no-bullet()
+    &
+        list-style-image none
+        list-style-type none
+        margin-left 0
+
+// No bullets for all direct descendent list items
+list-no-bullets()
+    & > li
+        list-no-bullet()
+
+// Show child list as inline
+list-inline()
+    & > ul, & > li
+        display inline
+        margin 0
+        padding 0
+
+// Float direct descendant list items
+list-floated(
+        padding   = padding-distance-small,
+        direction = left
+    )
+
+    list-no-bullets()
+
+    & > ul, & > ol
+        clear()
+
+    & > ul, & > ol, & > li
+        display block
+        margin 0
+        padding 0
+
+    li
+        float left
+
+        if padding > 0
+            padding 0 padding
+
+            &:first-child
+                padding-{direction} 0
+
+            &:last-child
+                padding-{opposite-position(direction)} 0

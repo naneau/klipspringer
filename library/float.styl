@@ -1,0 +1,31 @@
+// Clear a container for all child floats
+// See http://www.quirksmode.org/css/clearing.html
+// Apply to block level element that has floated children
+float-clear-container()
+    overflow auto
+    width 100%
+
+// Clear *after* an element
+//
+// Apply to block level element that is floated to clear after it, without
+// requiring extra markup
+//
+// see http://nicolasgallagher.com/micro-clearfix-hack/
+float-clear-after()
+    &:before, &:after
+        content: " "
+        display: table
+
+    &:after
+        content " "
+        display block
+        clear: both
+
+    // IE only (ugly, but required for IE7)
+    &
+        * zoom 1
+
+
+// Alias for float-clear-after
+clear()
+    float-clear-after-element()
