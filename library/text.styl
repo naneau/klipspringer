@@ -11,10 +11,10 @@
 text-font-family        ?= Helvetica Neue, Helvetica, Arial, Sans Serif
 
 // Font family for header text
-text-font-family-header ?= Helvetica Neue, Helvetica, Arial, Sans Serif
+text-font-family-header ?= text-font-family
 
 // Font family for action texts
-text-font-family-action ?= Helvetica Neue, Helvetica, Arial, Sans Serif
+text-font-family-action ?= text-font-family
 
 // Bolden headers?
 text-bolden-headers     ?= true
@@ -38,13 +38,16 @@ text(
         size-ratio        = 1,
         size-default      = text-default-size,
         line-height-ratio = text-line-height-ratio,
-        inherit-color     = true
+        inherit-color     = true,
+        use-color             = text-color
     )
 
     font-family text-font-family
 
     if inherit-color
         color inherit
+    else
+        color use-color
 
     // Actual font size is a default size times a ratio
     font-size (size-default * size-ratio)
@@ -54,19 +57,19 @@ text(
 
 // Base class for text of a header
 text-header(
-        size   = 1,
-        bolden = text-bolden-headers
+        size-ratio   = 1,
+        size-default = text-default-size,
+        bolden       = text-bolden-headers
     )
 
-    text(size)
+    text(size-ratio, size-default)
 
-    line-height text-size * size
     font-family text-font-family-header
 
     if bolden
         font-weight bold
 
-    -webkit-font-smoothing antialiased;
+    //-webkit-font-smoothing antialiased;
 
 // Lead text
 text-lead(
@@ -83,7 +86,6 @@ text-action(
     )
     text(size)
 
-    line-height text-size * size
     -webkit-font-smoothing antialiased;
 
     font-family: text-font-family-action
