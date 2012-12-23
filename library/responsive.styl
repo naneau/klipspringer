@@ -18,6 +18,23 @@
 
 ******************************************************************************/
 
+// Combine two media rules
+media-and(rule1, rule2)
+    "(" + rule1 + ") and (" + rule2 + ")"
+
+// Screen rule with a min-width
+media-screen-min(min)
+    "screen and (min-width: " + (min) + ")"
+
+// Screen rul with a max-width
+media-screen-max(max)
+    "screen and (max-width: " + (max - 1px) + ")"
+
+// Screen rule a min-width combined with a max-width
+// Max is reduced by one pixel to make it easy to create ranges
+media-screen-min-max(min, max)
+    "screen and (min-width: " + min + ") and (max-width: " + (max - 1px) + ")"
+
 // Default widths are based on Apple's phones and tablets
 media-tablet-landscape-width ?= 1024px
 media-tablet-portrait-width  ?= 768px
@@ -45,21 +62,4 @@ media-screen-bigger-than-phone-portrait    = media-screen-min(media-phone-portra
 
 // Print
 mediaPrint                                 = "print"
-
-// Combine two media rules
-media-and(rule1, rule2)
-    "(" + rule1 + ") and (" + rule2 + ")"
-
-// Screen rule with a min-width
-media-screen-min(min)
-    "screen and (min-width: " + (min) + ")"
-
-// Screen rul with a max-width
-media-screen-max(max)
-    "screen and (max-width: " + (max - 1px) + ")"
-
-// Screen rule a min-width combined with a max-width
-// Max is reduced by one pixel to make it easy to create ranges
-media-screen-min-max(min, max)
-    "screen and (min-width: " + min + ") and (max-width: " + (max - 1px) + ")"
 
