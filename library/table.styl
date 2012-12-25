@@ -1,14 +1,27 @@
 /******************************************************************************
 
-    TABLES
+ **TABLES**
+
+ These functions make it easy to style tabular data. Theres an default styling
+ function with collapsed border, etc.
+
+ This file also provides functions for the generation of zebra-striped tables,
+ etc.
 
 ******************************************************************************/
 
 @import "color"
 
-table-default-shade-one    ?= color-background
-table-default-shade-two    ?= color-light-background
-table-default-border-size  ?= 1px
+// Default shade color of the even rows
+table-default-shade-one ?= color-background
+
+// Shade color of the uneven rows
+table-default-shade-two ?= color-light-background
+
+// Default border size
+table-default-border-size ?= 1px
+
+// Color of the borders
 table-default-border-color ?= color-border
 
 // "Default" table
@@ -74,8 +87,9 @@ table-column-stripe(
             background-color shade-two
 
 // Zebra striped table in both horizontal and vertical direction
-// Uses shade-one and shade-two for the horizontal zebra and shades them by
-// column-shade in the vertical rows
+//
+// Uses `shade-one` and `shade-two` for the horizontal zebra and shades them by
+// `column-shade` in the vertical rows
 table-row-stripe-and-column-stripe(
         shade-one    = table-default-shade-one,
         shade-two    = table-default-shade-two,
