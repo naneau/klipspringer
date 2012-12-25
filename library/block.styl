@@ -1,6 +1,11 @@
 /******************************************************************************
 
-    BLOCK LEVEL STYLING
+ **BLOCK LEVEL STYLING**
+
+ Helps to create simple building "blocks" in styles, set up with paddings and
+ margins
+
+ See distances.styl for variables dealing with distances
 
 ******************************************************************************/
 
@@ -8,43 +13,79 @@
 @import "border"
 @import "distances"
 
+// Default shading difference between background color and border
+// See `block-background-border()`
+block-default-border-shade = 10%
+
 // Block level element
-block(margin = padding-distance)
+block(
+        margin = padding-distance
+    )
+
     margin-bottom margin
 
 // Block with a background color
 block-background(
         bg-color,
-        padding = padding-distance
+        padding                = padding-distance,
+        margin-bottom-distance = 0
     )
+
+    // Margin bottom
+    if margin-bottom-distance > 0
+        block(margin-bottom-distance)
+
     background-color bg-color
     padding padding
 
 // Block with a background and an even border based on the bg-color
 block-background-border(
         bg-color,
-        padding      = padding-distance,
-        border-shade = 10%
+        padding                = padding-distance,
+        border-shade           = block-default-border-shade,
+        border-size            = border-default-size,
+        margin-bottom-distance = 0
     )
 
-    block-background(bg-color, padding)
-    border(bg-color, darken(bg-color, border-shade))
+    block-background(bg-color, padding, margin-bottom-distance)
+    border(darken(bg-color, border-shade), border-size)
 
 // Rounded block with a background
 block-background-rounded(
         bg-color,
-        padding       = padding-distance,
-        border-radius = border-radius-small
+        padding                = padding-distance,
+        border-radius          = border-radius-small,
+        margin-bottom-distance = 0
     )
 
-    block-background(bg-color, padding)
+    block-background(bg-color, padding, margin-bottom-distance)
+    vendor('border-radius', border-radius)
+
+// A block that has:
+//
+//  * A background color
+//  * A border based on the background-color
+//  * Rounded corners
+//
+// Combines `block-background-border()` and `block-background-rounded`
+block-background-border-rounded(
+        bg-color,
+        padding                = padding-distance,
+        border-shade           = block-default-border-shade,
+        border-radius          = border-radius-small,
+        border-size            = border-default-size,
+        margin-bottom-distance = 0
+    )
+
+    block-background-border(bg-color, padding, border-shade, border-size, margin-bottom-distance)
+
     vendor('border-radius', border-radius)
 
 // Welled block, given an inside welled shadow
 // see box-shadow.styl
 block-welled(
         bg-color,
-        shade       = 10%,
+        shade       = block-default-border-shade,
         shadow-size = padding-distance-small
     )
 
