@@ -17,14 +17,17 @@
 // See `block-background-border()`
 block-default-border-shade = 10%
 
-// Block level element
+// Block level element with a margin at the bottom
 block(
-        margin = padding-distance
+        margin-bottom = padding-distance
     )
 
     margin-bottom margin
 
 // Block with a background color
+//
+// When a margin-bottom-distance is passed the block will have a bottom margin,
+// if left as 0 it will not
 block-background(
         bg-color,
         padding                = padding-distance,
@@ -39,6 +42,11 @@ block-background(
     padding padding
 
 // Block with a background and an even border based on the bg-color
+//
+// Applies `block-background()`
+//
+// The block will have a solid border with a width of `border-size`, and a color
+// that is `border-shade` darker than `bg-color`
 block-background-border(
         bg-color,
         padding                = padding-distance,
@@ -50,7 +58,11 @@ block-background-border(
     block-background(bg-color, padding, margin-bottom-distance)
     border(darken(bg-color, border-shade), border-size)
 
-// Rounded block with a background
+// Block with a background and rounded corners
+//
+// Applies `block-background()`
+//
+// Rounds the corners of the block by `border-radius`
 block-background-rounded(
         bg-color,
         padding                = padding-distance,
