@@ -34,7 +34,7 @@ text-color-light        ?= lighten(text-color, 60%)
 
 // Ratio for the line-height multiplication
 text-line-height-ratio ?= 1.9
-text-header-line-height-ratio ?= 1.2
+text-header-line-height-ratio ?= 1.3
 
 // Apply default text styles
 text(
@@ -79,20 +79,28 @@ text-header(
 
 // Lead text
 text-lead(
-        size = 1,
-        weight = text-lead-font-weight
+        size-ratio        = 1,
+        weight            = text-lead-font-weight
+        size-default      = text-default-size,
+        bolden            = text-bolden-headers,
+        line-height-ratio = text-header-line-height-ratio,
+        inherit-color     = true,
+        use-color         = text-color
     )
+    text(size-ratio, size-default, line-height-ratio, inherit-color, use-color)
 
-    text(size)
     font-weight weight
 
 // "Action" text, for UI elements
 text-action(
-        size = 1
+        size-ratio        = 1,
+        size-default      = text-default-size,
+        bolden            = text-bolden-headers,
+        line-height-ratio = text-header-line-height-ratio,
+        inherit-color     = true,
+        use-color         = text-color
     )
-    text(size)
-
-    -webkit-font-smoothing antialiased;
+    text(size-ratio, size-default, line-height-ratio, inherit-color, use-color)
 
     font-family: text-font-family-action
 
