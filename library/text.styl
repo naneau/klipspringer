@@ -59,12 +59,15 @@ text(
 
 // Base class for text of a header
 text-header(
-        size-ratio   = 1,
-        size-default = text-default-size,
-        bolden       = text-bolden-headers
+        size-ratio        = 1,
+        size-default      = text-default-size,
+        bolden            = text-bolden-headers,
+        line-height-ratio = text-line-height-ratio,
+        inherit-color     = true,
+        use-color         = text-color
     )
 
-    text(size-ratio, size-default)
+    text(size-ratio, size-default, line-height-ratio, inherit-color, use-color)
 
     font-family text-font-family-header
 
