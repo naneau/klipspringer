@@ -19,10 +19,41 @@ block-default-border-shade = 10%
 
 // Block level element with a margin at the bottom
 block(
-        margin-bottom = padding-distance
+        bottom-margin = padding-distance
     )
 
-    margin-bottom margin
+    margin-bottom bottom-margin
+
+//  Pad left
+block-padded-left(
+        distance = padding-distance
+    )
+    padding-left distance
+
+//  Pad left
+block-padded-right(
+        distance = padding-distance
+    )
+    padding-right distance
+
+// Horizontal padded block
+block-padded-horizontal(
+        distance = padding-distance
+    )
+    padding-left distance
+    padding-right distance
+
+block-padded-super-tiny()
+    padding padding-distance-super-tiny padding-distance-small
+
+block-padded-tiny()
+    padding padding-distance-tiny padding-distance
+
+block-padded-small()
+    padding padding-distance-small padding-distance
+
+block-padded()
+    padding padding-distance
 
 // Block with a background color
 //
@@ -31,6 +62,7 @@ block(
 block-background(
         bg-color,
         padding                = padding-distance,
+        padding-vertical       = padding-distance,
         margin-bottom-distance = 0
     )
 
@@ -39,7 +71,8 @@ block-background(
         block(margin-bottom-distance)
 
     background-color bg-color
-    padding padding
+    padding padding-vertical padding
+    block()
 
 // Block with a background and an even border based on the bg-color
 //
@@ -50,12 +83,13 @@ block-background(
 block-background-border(
         bg-color,
         padding                = padding-distance,
+        padding-vertical       = padding-distance,
         border-shade           = block-default-border-shade,
         border-size            = border-default-size,
         margin-bottom-distance = 0
     )
 
-    block-background(bg-color, padding, margin-bottom-distance)
+    block-background(bg-color, padding, padding-vertical, margin-bottom-distance)
     border(darken(bg-color, border-shade), border-size)
 
 // Block with a background and rounded corners
@@ -66,11 +100,12 @@ block-background-border(
 block-background-rounded(
         bg-color,
         padding                = padding-distance,
+        padding-vertical       = padding-distance,
         border-radius          = border-radius-small,
         margin-bottom-distance = 0
     )
 
-    block-background(bg-color, padding, margin-bottom-distance)
+    block-background(bg-color, padding, padding-vertical, margin-bottom-distance)
     vendor('border-radius', border-radius)
 
 // A block that has:
@@ -83,13 +118,14 @@ block-background-rounded(
 block-background-border-rounded(
         bg-color,
         padding                = padding-distance,
+        padding-vertical       = padding-distance,
         border-shade           = block-default-border-shade,
         border-radius          = border-radius-small,
         border-size            = border-default-size,
         margin-bottom-distance = 0
     )
 
-    block-background-border(bg-color, padding, border-shade, border-size, margin-bottom-distance)
+    block-background-border(bg-color, padding, padding-vertical, border-shade, border-size, margin-bottom-distance)
 
     vendor('border-radius', border-radius)
 
