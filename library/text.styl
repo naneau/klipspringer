@@ -75,14 +75,11 @@ text-header(
     if bolden
         font-weight bold
 
-    //-webkit-font-smoothing antialiased;
-
 // Lead text
 text-lead(
         size-ratio        = 1,
-        weight            = text-lead-font-weight
+        weight            = text-lead-font-weight,
         size-default      = text-default-size,
-        bolden            = text-bolden-headers,
         line-height-ratio = text-header-line-height-ratio,
         inherit-color     = true,
         use-color         = text-color
@@ -124,3 +121,20 @@ text-force-line-wrap()
     // IE 5+
     word-wrap break-word
 
+text-inset-bottom(
+        background-color,
+        text-shade,
+        shadow-shade
+    )
+
+    color lighten(background-color, text-shade)
+    text-shadow 1px 1px 0 lighten(background-color, shadow-shade)
+
+text-inset-top(
+        background-color,
+        text-shade,
+        shadow-shade
+    )
+
+    color lighten(background-color, text-shade)
+    text-shadow -1px -1px 0 darken(background-color, shadow-shade)
