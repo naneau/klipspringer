@@ -42,13 +42,16 @@ list-floated(
         padding 0
 
     li
-        float left
+        list-floated-item()
 
-        if padding > 0
-            padding 0 padding
+list-floated-item()
+    float left
 
-            &:first-child
-                padding-{direction} 0
+    if padding > 0
+        padding 0 padding
 
-            &:last-child
-                padding-{opposite-position(direction)} 0
+        &:first-child
+            padding-{direction} 0
+
+        &:last-child
+            padding-{opposite-position(direction)} 0
