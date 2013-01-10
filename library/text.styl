@@ -99,7 +99,7 @@ text-action(
     )
     text(size-ratio, size-default, line-height-ratio, inherit-color, use-color)
 
-    font-family: text-font-family-action
+    font-family text-font-family-action
 
 // Force line-wrapping
 // see http://perishablepress.com/wrapping-content/
@@ -121,20 +121,39 @@ text-force-line-wrap()
     // IE 5+
     word-wrap break-word
 
+// Set text to a color and box shadow to create inset effect for a certain
+// background color
+//
+// Adds shadow to the bottom and lightens the text. For darker background-colors
 text-inset-bottom(
         background-color,
-        text-shade,
-        shadow-shade
+        text-shade   = 80%,
+        shadow-shade = 20%,
+        shadow-size  = 1px
     )
 
     color lighten(background-color, text-shade)
-    text-shadow 1px 1px 0 lighten(background-color, shadow-shade)
+    text-shadow shadow-size shadow-size 0 lighten(background-color, shadow-shade)
 
+// Set text to a color and box shadow to create inset effect for a certain
+// background color
+//
+// Adds shadow to the top and darkens the text. For lighter background-colors
 text-inset-top(
         background-color,
-        text-shade,
-        shadow-shade
+        text-shade   = 80%,
+        shadow-shade = 20%,
+        shadow-size  = -1px
     )
 
     color lighten(background-color, text-shade)
-    text-shadow -1px -1px 0 darken(background-color, shadow-shade)
+    text-shadow shadow-size shadow-size 0 darken(background-color, shadow-shade)
+
+// Disable text selection
+text-disable-selection()
+    -webkit-touch-callout none
+    -webkit-user-select none
+    -khtml-user-select none
+    -moz-user-select none
+    -ms-user-select none
+    user-select none
